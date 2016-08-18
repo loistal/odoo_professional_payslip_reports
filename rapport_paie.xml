@@ -1,0 +1,11 @@
+<openerp>
+    <data>
+        <template id="rapport_paie_view" inherit_id="hr_payroll.report_payslip">
+            <xpath expr="//div[@class='page']" position="before">
+                <page name="Sample" string="Custom page">
+                    
+                </page>
+            </xpath>
+        </template>
+    </data>
+</openerp>
