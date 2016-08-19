@@ -3,6 +3,9 @@
         <template id="rapport_paie_view" inherit_id="hr_payroll.report_payslip">
             <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
                 <tr>
+                    <strong>METTRE CODE ICI</strong>
+                </tr>
+                <tr>
                     <th>Name</th>
                     <th>Quantity</th>
                     <th>Rate</th>
@@ -12,52 +15,73 @@
                 </tr>
             </xpath>
             <xpath expr="//table[@class='table table-condensed']//tbody//tr" position="replace">
-                <tr t-as="p" t-foreach="get_payslip_lines(o.line_ids)">
-                    <t t-if="'TOTAL' in p.name">
-                        <td>
-                            <strong>
-                                <span style="background-color:lightgray;" t-field="p.name"/>
-                            </strong>
-                        </td>
-                        <td>
-                            <strong>
+                <t t-as="p" t-foreach="get_payslip_lines(o.line_ids)">
+                    <tr>
+                        <t t-if="'TOTAL' in p.name">
+                            <td>
+                                <strong>
+                                    <span style="background-color:lightgray;" t-field="p.name"/>
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    <span t-field="p.quantity"/>
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    <span t-field="p.amount_percentage"/>
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
+                                </strong>
+                            </td>
+                            <td>
+                                <strong>
+                                    <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
+                                </strong>
+                            </td>
+                        </t>
+                        <t t-if="'TOTAL' not in p.name">
+                            <td>
+                                <span t-field="p.name"/>
+                            </td>
+                            <td>
                                 <span t-field="p.quantity"/>
-                            </strong>
-                        </td>
-                        <td>
-                            <strong>
+                            </td>
+                            <td>
                                 <span t-field="p.amount_percentage"/>
-                            </strong>
-                        </td>
-                        <td>
-                            <strong>
+                            </td>
+                            <td>
                                 <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
-                            </strong>
-                        </td>
-                        <td>
-                            <strong>
+                            </td>
+                            <td>
                                 <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
-                            </strong>
-                        </td>
+                            </td>
+                        </t>
+                    </tr>
+                    <t t-if="'TOTAL' in p.name">
+                        <thead>
+                            <tr>
+                                <td>
+                                    <strong>
+                                        <span t-field="p.code"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Rate</th>
+                                <!-- Séparation de Quantity et Rate -->
+                                <th>Amount</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
                     </t>
-                    <t t-if="'TOTAL' not in p.name">
-                        <td>
-                            <span t-field="p.name"/>
-                        </td>
-                        <td>
-                            <span t-field="p.quantity"/>
-                        </td>
-                        <td>
-                            <span t-field="p.amount_percentage"/>
-                        </td>
-                        <td>
-                            <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
-                        </td>
-                        <td>
-                            <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
-                        </td>
-                    </t>
-                </tr>
+                </t>
             </xpath>
             <!--
             <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"/><xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"><t t-if="'TOTAL' in p.name"><td><strong><span t-field="p.name" style="background-color:lightgray;"/></strong></td></t><t t-if="'TOTAL' not in p.name"><td><span t-field="p.name"/></td></t></xpath><xpath expr="//table[@class='table table-condensed']//tbody//tr//td[2]" position="before"><t t-if="'TOTAL' in p.name"><td><strong><span t-field="p.amount_percentage"/></strong></td></t><t t-if="'TOTAL' not in p.name"><td><span t-field="p.amount_percentage"/></td></t></xpath>-->
