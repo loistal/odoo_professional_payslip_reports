@@ -11,35 +11,56 @@
                     <th>Total</th>
                 </tr>
             </xpath>
-            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"/>
-            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace">
-                <t t-if="'TOTAL' in p.name">
-                    <td>
-                        <strong>
+            <xpath expr="//table[@class='table table-condensed']//tbody//tr" position="replace">
+                <tr t-as="p" t-foreach="get_payslip_lines(o.line_ids)">
+                    <t t-if="'TOTAL' in p.name">
+                        <td>
+                            <strong>
+                                <span style="background-color:lightgray;" t-field="p.name"/>
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <span t-field="p.quantity"/>
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <span t-field="p.amount_percentage"/>
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
+                            </strong>
+                        </td>
+                        <td>
+                            <strong>
+                                <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
+                            </strong>
+                        </td>
+                    </t>
+                    <t t-if="'TOTAL' not in p.name">
+                        <td>
                             <span t-field="p.name"/>
-                        </strong>
-                    </td>
-                </t>
-                <t t-if="'TOTAL' not in p.name">
-                    <td>
-                        <span t-field="p.name"/>
-                    </td>
-                </t>
-            </xpath>
-            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[2]" position="after">
-                <t t-if="'TOTAL' in p.name">
-                    <td>
-                        <strong>
+                        </td>
+                        <td>
+                            <span t-field="p.quantity"/>
+                        </td>
+                        <td>
                             <span t-field="p.amount_percentage"/>
-                        </strong>
-                    </td>
-                </t>
-                <t t-if="'TOTAL' not in p.name">
-                    <td>
-                        <span t-field="p.amount_percentage"/>
-                    </td>
-                </t>
+                        </td>
+                        <td>
+                            <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
+                        </td>
+                        <td>
+                            <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
+                        </td>
+                    </t>
+                </tr>
             </xpath>
+            <!--
+            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"/><xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"><t t-if="'TOTAL' in p.name"><td><strong><span t-field="p.name" style="background-color:lightgray;"/></strong></td></t><t t-if="'TOTAL' not in p.name"><td><span t-field="p.name"/></td></t></xpath><xpath expr="//table[@class='table table-condensed']//tbody//tr//td[2]" position="before"><t t-if="'TOTAL' in p.name"><td><strong><span t-field="p.amount_percentage"/></strong></td></t><t t-if="'TOTAL' not in p.name"><td><span t-field="p.amount_percentage"/></td></t></xpath>-->
         </template>
     </data>
 </openerp>
