@@ -6,11 +6,11 @@
                     <strong>Titre du tableau BRUT</strong>
                 </tr>
                 <tr>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Rate</th>
-                    <!-- Séparation de Quantity et Rate -->
-                    <th>Amount</th>
+                    <th>Nom</th>
+                    <th>Quantité</th>
+                    <th>Taux</th>
+                    <th>Nombre</th>
+                    <!-- Amount -->
                     <th>Total</th>
                 </tr>
             </xpath>
@@ -62,33 +62,52 @@
                             </td>
                         </t>
                     </tr>
+                    <!-- Repeat -->
                     <t t-if="'TOTAL' in p.name">
-                        <thead>
-                            <tr>
-                                <td>
-                                    <t t-if="p.name == 'TOTAL BRUT'">
-                                        <strong>Titre du tableau CPS</strong>
-                                    </t>
-                                    <t t-if="p.name == 'TOTAL CPS'">
-                                        <strong>Titre du tableau C.S.T</strong>
-                                    </t>
-                                    <t t-if="p.name == 'TOTAL C.S.T'">
-                                        <strong>Titre du tableau NET</strong>
-                                    </t>
-                                    <t t-if="p.name == 'TOTAL NET'">
-                                        <strong>Titre du tableau patronale</strong>
-                                    </t>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <th>Quantity</th>
-                                <th>Rate</th>
-                                <!-- Séparation de Quantity et Rate -->
-                                <th>Amount</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
+                        <tr>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                            <td/>
+                        </tr>
+                    </t>
+                    <t t-if="'TOTAL' in p.name">
+                        <t t-if="p.name != 'TOTAL CPS'">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <t t-if="p.name == 'TOTAL BRUT'">
+                                            <strong>Titre du tableau CPS et C.S.T</strong>
+                                        </t>
+                                        <t t-if="p.name == 'TOTAL CPS'">
+                                            <strong>Titre du tableau C.S.T</strong>
+                                        </t>
+                                        <t t-if="p.name == 'TOTAL C.S.T'">
+                                            <strong>Titre du tableau NET</strong>
+                                        </t>
+                                        <t t-if="p.name == 'TOTAL NET'">
+                                            <strong>Titre du tableau patronale</strong>
+                                        </t>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Rate</th>
+                                    <!-- Séparation de Quantity et Rate -->
+                                    <th>Amount</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                        </t>
                     </t>
                 </t>
             </xpath>
