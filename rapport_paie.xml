@@ -4,12 +4,16 @@
             <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
                 <tr>
                     <th>Name</th>
-                    <th>Quantity/rate</th>
+                    <th>Quantity</th>
+                    <th>Rate</th> <!-- Séparation de Quantity et Rate -->
                     <th>Amount</th>
                     <th>Total</th>
                 </tr>
             </xpath>
             <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"/>
+            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[3]" position="after">
+                <td><span t-field="p.rate"/></td>
+            </xpath>
         </template>
     </data>
 </openerp>
