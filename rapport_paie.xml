@@ -5,14 +5,40 @@
                 <tr>
                     <th>Name</th>
                     <th>Quantity</th>
-                    <th>Rate</th> <!-- Séparation de Quantity et Rate -->
+                    <th>Rate</th>
+                    <!-- Séparation de Quantity et Rate -->
                     <th>Amount</th>
                     <th>Total</th>
                 </tr>
             </xpath>
             <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"/>
-            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[3]" position="after">
-                <td><span t-field="p.rate"/></td>
+            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace">
+                <t t-if="'TOTAL' in p.name">
+                    <td>
+                        <strong>
+                            <span t-field="p.name"/>
+                        </strong>
+                    </td>
+                </t>
+                <t t-if="'TOTAL' not in p.name">
+                    <td>
+                        <span t-field="p.name"/>
+                    </td>
+                </t>
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[2]" position="after">
+                <t t-if="'TOTAL' in p.name">
+                    <td>
+                        <strong>
+                            <span t-field="p.amount_percentage"/>
+                        </strong>
+                    </td>
+                </t>
+                <t t-if="'TOTAL' not in p.name">
+                    <td>
+                        <span t-field="p.amount_percentage"/>
+                    </td>
+                </t>
             </xpath>
         </template>
     </data>
