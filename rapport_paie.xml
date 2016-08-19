@@ -3,7 +3,7 @@
         <template id="rapport_paie_view" inherit_id="hr_payroll.report_payslip">
             <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
                 <tr>
-                    <strong>METTRE CODE ICI</strong>
+                    <strong>Titre du tableau BRUT</strong>
                 </tr>
                 <tr>
                     <th>Name</th>
@@ -66,9 +66,18 @@
                         <thead>
                             <tr>
                                 <td>
-                                    <strong>
-                                        <span t-field="p.code"/>
-                                    </strong>
+                                    <t t-if="p.name == 'TOTAL BRUT'">
+                                        <strong>Titre du tableau CPS</strong>
+                                    </t>
+                                    <t t-if="p.name == 'TOTAL CPS'">
+                                        <strong>Titre du tableau C.S.T</strong>
+                                    </t>
+                                    <t t-if="p.name == 'TOTAL C.S.T'">
+                                        <strong>Titre du tableau NET</strong>
+                                    </t>
+                                    <t t-if="p.name == 'TOTAL NET'">
+                                        <strong>Titre du tableau patronale</strong>
+                                    </t>
                                 </td>
                             </tr>
                             <tr>
@@ -83,8 +92,6 @@
                     </t>
                 </t>
             </xpath>
-            <!--
-            <xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"/><xpath expr="//table[@class='table table-condensed']//tbody//tr//td[1]" position="replace"><t t-if="'TOTAL' in p.name"><td><strong><span t-field="p.name" style="background-color:lightgray;"/></strong></td></t><t t-if="'TOTAL' not in p.name"><td><span t-field="p.name"/></td></t></xpath><xpath expr="//table[@class='table table-condensed']//tbody//tr//td[2]" position="before"><t t-if="'TOTAL' in p.name"><td><strong><span t-field="p.amount_percentage"/></strong></td></t><t t-if="'TOTAL' not in p.name"><td><span t-field="p.amount_percentage"/></td></t></xpath>-->
         </template>
     </data>
 </openerp>
