@@ -1,6 +1,9 @@
 <openerp>
     <data>
         <template id="rapport_paie_view" inherit_id="hr_payroll.report_payslip">
+            <xpath expr="//div[@class='page']//h2" position="before">
+                <br/>
+            </xpath>
             <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
                 <tr>
                     <strong>Titre du tableau BRUT</strong>
@@ -64,20 +67,22 @@
                     </tr>
                     <!-- Repeat -->
                     <t t-if="'TOTAL' in p.name">
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                        </tr>
-                        <tr>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                            <td/>
-                        </tr>
+                        <t t-if="p.name != 'TOTAL CPS'">
+                            <tr>
+                                <td/>
+                                <td/>
+                                <td/>
+                                <td/>
+                                <td/>
+                            </tr>
+                            <tr>
+                                <td/>
+                                <td/>
+                                <td/>
+                                <td/>
+                                <td/>
+                            </tr>
+                        </t>
                     </t>
                     <t t-if="'TOTAL' in p.name">
                         <t t-if="p.name != 'TOTAL CPS'">
@@ -98,14 +103,16 @@
                                         </t>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Rate</th>
-                                    <!-- Séparation de Quantity et Rate -->
-                                    <th>Amount</th>
-                                    <th>Total</th>
-                                </tr>
+                                <t t-if="p.name != 'TOTAL CPS(patronale)'">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Rate</th>
+                                        <!-- Séparation de Quantity et Rate -->
+                                        <th>Amount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </t>
                             </thead>
                         </t>
                     </t>
