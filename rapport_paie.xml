@@ -6,7 +6,7 @@
             </xpath>
             <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
                 <tr>
-                    <strong>Titre du tableau BRUT</strong>
+                    <h3>Titre du tableau BRUT</h3>
                 </tr>
                 <tr>
                     <th>Nom</th>
@@ -90,16 +90,13 @@
                                 <tr>
                                     <td>
                                         <t t-if="p.name == 'TOTAL BRUT'">
-                                            <strong>Titre du tableau CPS et C.S.T</strong>
-                                        </t>
-                                        <t t-if="p.name == 'TOTAL CPS'">
-                                            <strong>Titre du tableau C.S.T</strong>
+                                            <h3>CPS et C.S.T</h3>
                                         </t>
                                         <t t-if="p.name == 'TOTAL C.S.T'">
-                                            <strong>Titre du tableau NET</strong>
+                                            <h3>NET</h3>
                                         </t>
                                         <t t-if="p.name == 'TOTAL NET'">
-                                            <strong>Titre du tableau patronale</strong>
+                                            <h3>CPS (patronale)</h3>
                                         </t>
                                     </td>
                                 </tr>
