@@ -1,12 +1,15 @@
 <openerp>
     <data>
         <template id="rapport_paie_view" inherit_id="hr_payroll.report_payslip">
-            <xpath expr="//div[@class='page']//h2" position="before">
+            <xpath expr="//div[@class='page']//h2" position="replace">
                 <br/>
+            </xpath>
+            <xpath expr="//div[@class='page']//p" position="replace">
+                <h2 t-field="o.name"/>
             </xpath>
             <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
                 <tr>
-                    <h3>Titre du tableau BRUT</h3>
+                    <h4>BRUT</h4>
                 </tr>
                 <tr>
                     <th>Nom</th>
@@ -71,23 +74,23 @@
                                 <tr>
                                     <td>
                                         <t t-if="p.name == 'TOTAL BRUT'">
-                                            <h3>CPS et C.S.T</h3>
+                                            <h4>CPS et C.S.T</h4>
                                         </t>
                                         <t t-if="p.name == 'TOTAL C.S.T'">
-                                            <h3>NET</h3>
+                                            <h4>NET</h4>
                                         </t>
                                         <t t-if="p.name == 'TOTAL NET'">
-                                            <h3>CPS (patronale)</h3>
+                                            <h4>CPS (patronale)</h4>
                                         </t>
                                     </td>
                                 </tr>
                                 <t t-if="p.name != 'TOTAL CPS(patronale)'">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Quantity</th>
-                                        <th>Rate</th>
-                                        <!-- Séparation de Quantity et Rate -->
-                                        <th>Amount</th>
+                                        <th>Nom</th>
+                                        <th>Quantité</th>
+                                        <th>Taux</th>
+                                        <th>Nombre</th>
+                                        <!-- Amount -->
                                         <th>Total</th>
                                     </tr>
                                 </t>
