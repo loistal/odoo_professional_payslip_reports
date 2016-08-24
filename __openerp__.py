@@ -29,6 +29,7 @@
         'views/templates.xml',
         'rapport_paie.xml',
         'views/resources.xml',
+        'additional_styles.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

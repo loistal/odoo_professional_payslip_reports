@@ -1,0 +1,13 @@
+<openerp>
+	<data>
+		<template id="report_saleorder_style" inherit_id="hr_payroll.report_payslip">
+			<xpath expr=".">
+				<t>
+					.h2 {
+        				background-color: red;
+      				}
+    			</t>
+			</xpath>
+		</template>
+	</data>
+</openerp>

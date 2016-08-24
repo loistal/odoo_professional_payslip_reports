@@ -18,41 +18,98 @@
                 <h2>Bulletin de Paie ( de 
                     <span t-field="o.date_from"/>
                     à 
-                    <span t-field="o.date_to"/>
+<span t-field="o.date_to"/>
                     )</h2>
-                <h4>BRUT</h4>
+                <!--<h4>BRUT</h4>-->
+            </xpath>
+            <xpath expr="//table[@class='table table-condensed']//thead//tr" position="replace">
+                <tr>
+                    <th>Nom</th>
+                    <th>Quantité</th>
+                    <th>Taux</th>
+                    <th>Montant</th>
+                    <th>Total</th>
+                </tr>
             </xpath>
             <xpath expr="//table[@class='table table-condensed']//tbody//tr" position="replace">
                 <t t-as="p" t-foreach="get_payslip_lines(o.line_ids)">
-                    <tr>
-                        <t t-if="'TOTAL' in p.name">
-                            <td style="background-color:lightgray;">
-                                <strong>
-                                    <span style="background-color:lightgray;" t-field="p.name"/>
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <span t-field="p.quantity"/>
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <span t-field="p.amount_percentage"/>
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
-                                </strong>
-                            </td>
-                            <td>
-                                <strong>
-                                    <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
-                                </strong>
-                            </td>
+                    <t t-if="'TOTAL' in p.name">
+                        <t t-if="p.name == 'TOTAL NET'">
+                            <tr style="background-color:lightgray;">
+                                <td>
+                                    <strong>
+                                        <span style="background-color:lightgray;" t-field="p.name"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-field="p.quantity"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-field="p.amount_percentage"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <h4>Côtisation CPS (patronale)</h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Quantité</th>
+                                    <th>Taux</th>
+                                    <th>Nombre</th>
+                                    <!-- Amount -->
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
                         </t>
-                        <t t-if="'TOTAL' not in p.name">
+                        <t t-if="p.name != 'TOTAL NET'">
+                            <tr style="background-color:lightgray;">
+                                <td>
+                                    <strong>
+                                        <span style="background-color:lightgray;" t-field="p.name"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-field="p.quantity"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-field="p.amount_percentage"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-esc="formatLang(p.amount, currency_obj=o.company_id.currency_id)"/>
+                                    </strong>
+                                </td>
+                                <td>
+                                    <strong>
+                                        <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
+                                    </strong>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                    <t t-if="'TOTAL' not in p.name">
+                        <tr>
                             <td>
                                 <span t-field="p.name"/>
                             </td>
@@ -68,36 +125,10 @@
                             <td>
                                 <span t-esc="formatLang(p.total, currency_obj=o.company_id.currency_id)"/>
                             </td>
-                        </t>
-                    </tr>
-                    <t t-if="'TOTAL' in p.name">
-                        <t t-if="p.name != 'TOTAL CPS'">
-                            <t t-if="p.name != 'TOTAL C.S.T'">
-                                <thead>
-                                    <tr>
-                                        <td>
-                                            <t t-if="p.name == 'TOTAL BRUT'">
-                                                <h4>CPS - C.S.T - NET</h4>
-                                            </t>
-                                            <t t-if="p.name == 'TOTAL NET'">
-                                                <h4>CPS (patronale)</h4>
-                                            </t>
-                                        </td>
-                                    </tr>
-                                    <t t-if="p.name != 'TOTAL CPS(patronale)'">
-                                        <tr>
-                                            <th>Nom</th>
-                                            <th>Quantité</th>
-                                            <th>Taux</th>
-                                            <th>Nombre</th>
-                                            <!-- Amount -->
-                                            <th>Total</th>
-                                        </tr>
-                                    </t>
-                                </thead>
-                            </t>
-                        </t>
+                        </tr>
                     </t>
+                    <!--
+                    <t t-if="'TOTAL' in p.name"><t t-if="p.name != 'TOTAL CPS'"><t t-if="p.name != 'TOTAL C.S.T'"><thead><tr><td><t t-if="p.name == 'TOTAL BRUT'"><h4>CPS - C.S.T - NET</h4></t><t t-if="p.name == 'TOTAL NET'"><h4>CPS (patronale)</h4></t></td></tr><t t-if="p.name != 'TOTAL CPS(patronale)'"><tr><th>Nom</th><th>Quantité</th><th>Taux</th><th>Nombre</th><th>Total</th></tr></t></thead></t></t></t>-->
                 </t>
             </xpath>
         </template>
