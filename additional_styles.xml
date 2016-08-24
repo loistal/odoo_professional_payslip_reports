@@ -1,12 +1,8 @@
 <openerp>
 	<data>
-		<template id="report_saleorder_style" inherit_id="hr_payroll.report_payslip">
-			<xpath expr=".">
-				<t>
-					.h2 {
-        				background-color: red;
-      				}
-    			</t>
+		<template id="report_style" inherit_id="hr_payroll.report_payslip">
+			<xpath expr="." position="inside">
+				<link rel="stylesheet" href="/vct_rapport_paie/static/src/css/vct_rapport_paie.css"/>
 			</xpath>
 		</template>
 	</data>

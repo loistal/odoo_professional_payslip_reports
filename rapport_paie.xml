@@ -2,6 +2,11 @@
     <data>
         <template id="rapport_paie_view" inherit_id="hr_payroll.report_payslip">
             <!-- Supprimer le titre original -->
+            <xpath expr="//div[@class='page']" position="inside">
+                <style type="text/css">h2   {font-size: 16; font-weight:bold;text-decoration:underline;}
+                 table#t01 {text-align: center;width: 75%; border-left: 1px solid black; border-right: 1px solid black;}
+                </style>
+            </xpath>
             <xpath expr="//div[@class='page']//h2" position="replace">
                 <br/>
             </xpath>
@@ -16,9 +21,11 @@
                     <span t-field="o.employee_id.bank_account_id"/>
                 </div>
                 <h2>Bulletin de Paie ( de 
+            
                     <span t-field="o.date_from"/>
                     à 
-<span t-field="o.date_to"/>
+            
+                    <span t-field="o.date_to"/>
                     )</h2>
                 <!--<h4>BRUT</h4>-->
             </xpath>
@@ -128,7 +135,7 @@
                         </tr>
                     </t>
                     <!--
-                    <t t-if="'TOTAL' in p.name"><t t-if="p.name != 'TOTAL CPS'"><t t-if="p.name != 'TOTAL C.S.T'"><thead><tr><td><t t-if="p.name == 'TOTAL BRUT'"><h4>CPS - C.S.T - NET</h4></t><t t-if="p.name == 'TOTAL NET'"><h4>CPS (patronale)</h4></t></td></tr><t t-if="p.name != 'TOTAL CPS(patronale)'"><tr><th>Nom</th><th>Quantité</th><th>Taux</th><th>Nombre</th><th>Total</th></tr></t></thead></t></t></t>-->
+                        <t t-if="'TOTAL' in p.name"><t t-if="p.name != 'TOTAL CPS'"><t t-if="p.name != 'TOTAL C.S.T'"><thead><tr><td><t t-if="p.name == 'TOTAL BRUT'"><h4>CPS - C.S.T - NET</h4></t><t t-if="p.name == 'TOTAL NET'"><h4>CPS (patronale)</h4></t></td></tr><t t-if="p.name != 'TOTAL CPS(patronale)'"><tr><th>Nom</th><th>Quantité</th><th>Taux</th><th>Nombre</th><th>Total</th></tr></t></thead></t></t></t>-->
                 </t>
             </xpath>
         </template>
